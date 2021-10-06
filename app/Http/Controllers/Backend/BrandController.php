@@ -67,9 +67,6 @@ class BrandController extends Controller
      } // end method
 
 
-
-
-
      // update brand
      public function BrandUpdate(Request $request){
 

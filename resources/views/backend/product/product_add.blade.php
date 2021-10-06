@@ -139,15 +139,6 @@
                         </div> {{-- end row --}}
                     
 
-
-
-
-
-
-
-
-                        
-
                             <div class="row">  
 
                           <div class="col-md-4">      
@@ -185,19 +176,9 @@
                                      </div>
                             </div>
                          </div>  {{-- end col-md-3 --}}
-
-                         
-                      
-
-                         
-                         
+                 
 
                         </div> {{-- end row --}}
-
-
-
-
-
 
                       <div class="row">   
                          
@@ -220,27 +201,6 @@
 
                         </div> {{-- end row --}}
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
                           <div class="row">  
 
                           <div class="col-md-6">      
@@ -256,27 +216,25 @@
 
                                      </div>
 
-
-
-
-
                             </div>
                             </div>  {{-- end col-md-3 --}}  
 
                        <div class="col-md-6">
                             <div class="form-group">
-                                <h6>Product Multiple Image <span class="text-danger">*</span></h6>
+                                <h5>Product Multi Img <span class="text-danger">*</span></h5>
                                 <div class="controls">
+                                <input type="file" name="multi_img[]"  multiple="" id="MultiImg" class="form-control" required="" > </div>
+                        
+                                @error('multi_img') 
+                                <span class="text-danger">{{ $message }}</span>
+                                @enderror 
 
-                                     <input type="file" name="multi_img[]" class="form-control" multiple="" id="multiImg" >
-
-                              <div class="row" id="preview_img"></div>
-
+                                <div class="row" id="preview_img"></div>
 
                             </div>
                         </div>  {{-- end col-md-3 --}}  
 
-                        </div> {{-- end row --}}
+                    </div> {{-- end row --}}
 
 
                    <div class="row"> <!-- start 7th row  -->
@@ -297,18 +255,11 @@
                  </div>
                </div>
             </div> <!-- end col md 6 --> 
-
-
         </div> <!-- end 7th row  -->
-                          
+                            
                            
-                        </div>
+                </div>
                     </div>
-
-
-
-
-
                         <div class="row">                       
                             <div class="col-md-6">
                                 <div class="form-group">
@@ -443,34 +394,34 @@
   {{-- Multi Img --}}
 
   <script>
+ 
+  $(document).ready(function(){
+   $('#MultiImg').on('change', function(){ //on file input change
+      if (window.File && window.FileReader && window.FileList && window.Blob) //check File API supported browser
+      {
+          var data = $(this)[0].files; //this file data
+           
+          $.each(data, function(index, file){ //loop though each file
+              if(/(\.|\/)(gif|jpe?g|png)$/i.test(file.type)){ //check supported file type
+                  var fRead = new FileReader(); //new filereader
+                  fRead.onload = (function(file){ //trigger function on successful read
+                  return function(e) {
+                      var img = $('<img/>').addClass('thumb').attr('src', e.target.result) .width(80)
+                  .height(80); //create image element 
+                      $('#preview_img').append(img); //append image to output element
+                  };
+                  })(file);
+                  fRead.readAsDataURL(file); //URL representing the file's data.
+              }
+          });
+           
+      }else{
+          alert("Your browser doesn't support File API!"); //if File API is absent
+      }
+   });
+  });
    
-    $(document).ready(function(){
-     $('#multiImg').on('change', function(){ //on file input change
-        if (window.File && window.FileReader && window.FileList && window.Blob) //check File API supported browser
-        {
-            var data = $(this)[0].files; //this file data
-             
-            $.each(data, function(index, file){ //loop though each file
-                if(/(\.|\/)(gif|jpe?g|png)$/i.test(file.type)){ //check supported file type
-                    var fRead = new FileReader(); //new filereader
-                    fRead.onload = (function(file){ //trigger function on successful read
-                    return function(e) {
-                        var img = $('<img/>').addClass('thumb').attr('src', e.target.result) .width(80)
-                    .height(80); //create image element 
-                        $('#preview_img').append(img); //append image to output element
-                    };
-                    })(file);
-                    fRead.readAsDataURL(file); //URL representing the file's data.
-                }
-            });
-             
-        }else{
-            alert("Your browser doesn't support File API!"); //if File API is absent
-        }
-     });
-    });
-     
-    </script>
+  </script>
 
 
 

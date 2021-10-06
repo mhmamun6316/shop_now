@@ -67,34 +67,31 @@ class ProductController extends Controller
     ]);
 
 
-        //////////  Multiple Image ///////////        
-        $images = $request->file('multi_img');
-      foreach ($images as $img) {
-        $make_name = hexdec(uniqid()).'.'.$img->getClientOriginalExtension();
-      Image::make($img)->resize(917,1000)->save('upload/products/multi-image/'.$make_name);
-      $uploadPath = 'upload/products/multi-image/'.$make_name;
+       // Multiple img upload start
+       $images = $request->file('multi_img');
+       foreach ($images as $img){
+           $make_name = hexdec(uniqid()).'.'.$img->getClientOriginalExtension();
+           Image::make($img)->resize(917,1000)->save('upload/products/multi-image/'.$make_name);
+           $uploadPath = 'upload/products/multi-image/'.$make_name;
 
+           Multi_Img::insert([
+               // product_id is all info make single id 
+               'product_id' => $product_id,
+               'photo_name' => $uploadPath,
+               'created_at' => Carbon::now(), 
+           ]);
 
-        Multi_Img::insert([
+            } // end loop
+        // Multiple img end
 
-                'product_id' => $product_id,
-                'photo_name' => $uploadPath,
-                'created_at' => Carbon::now(), 
+        $notification = array(
+            'message' => 'Product Add Successfully',
+            'alert-type' => 'success'
+        );
 
-              ]);
-
-              }
-
-               $notification = array(
-              'message' => 'Product Inserted Successfully',
-              'alert-type' => 'success'
-            );
-
-            return redirect()->back()->with($notification);
+        return redirect()->route('all.product')->with($notification);
 
 	} // end method
-
-
 
 
  // product view
