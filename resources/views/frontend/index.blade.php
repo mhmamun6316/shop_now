@@ -7,59 +7,15 @@
   <div class="body-content outer-top-xs" id="top-banner-and-menu">
     <div class="container">
       <div class="row"> 
-        <!-- ============================================== SIDEBAR ============================================== -->
+        <!-- =================== SIDEBAR ========================== -->
         <div class="col-xs-12 col-sm-12 col-md-3 sidebar"> 
           
-          <!-- ================================== TOP NAVIGATION ================================== -->
-          <div class="side-menu animate-dropdown outer-bottom-xs">
-          
-            <div class="head"><i class="icon fa fa-align-justify fa-fw"></i> Categories</div>
-            <nav class="yamm megamenu-horizontal">
-              <ul class="nav">
-                @foreach($categories as $category)
-                <li class="dropdown menu-item"> <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="icon fa fa-shopping-bag" aria-hidden="true"></i>{{ $category->category_name }}</a>
-                  <ul class="dropdown-menu mega-menu">
-                    <li class="yamm-content">
-                      <div class="row">
-                          @php
-                          $subcategories = App\Models\SubCategory::where('category_id',$category->id)->orderBy('subcategory_name','ASC')->get();
-                          @endphp
-
-                          @foreach($subcategories as $subcategory)
-                        <div class="col-sm-12 col-md-3">
-                          <ul class="links list-unstyled">
-                              @php
-                              $subsubcategories = App\Models\SubSubCategory::where('subcategory_id',$subcategory->id)->orderBy('subsubcategory_name','ASC')->get();
-                              @endphp
-                                @foreach($subsubcategories as $subsubcategory)
-                                <li><a href="#">{{ $subsubcategory->subsubcategory_name }}</a></li>
-                                @endforeach
-                          </ul>
-                        </div>
-                        @endforeach
-                        <!-- /.col -->
-                      </div>
-                      <!-- /.row --> 
-                    </li>
-                    <!-- /.yamm-content -->
-                  </ul>
-                  <!-- /.dropdown-menu --> </li>
-                @endforeach
-                <!-- /.menu-item -->
-                  <!-- ================================== MEGAMENU VERTICAL ================================== --> 
-                  <!-- /.dropdown-menu --> 
-                  <!-- ================================== MEGAMENU VERTICAL ================================== --> </li>
-                <!-- /.menu-item -->
-                
-              </ul>
-              <!-- /.nav --> 
-            </nav>
-            <!-- /.megamenu-horizontal --> 
-          </div>
+          <!-- ======================== TOP NAVIGATION ====================== -->
+          @include('frontend.common.sidebar_menu')
           <!-- /.side-menu --> 
-          <!-- ================================== TOP NAVIGATION : END ================================== --> 
+          <!-- ===================== TOP NAVIGATION : END ===================== --> 
           
-          <!-- ============================================== HOT DEALS ============================================== -->
+          <!-- ======================= HOT DEALS ===================== -->
           <div class="sidebar-widget hot-deals wow fadeInUp outer-bottom-xs">
             <h3 class="section-title">hot deals</h3>
             <div class="owl-carousel sidebar-carousel custom-carousel owl-theme outer-top-ss">
@@ -359,8 +315,6 @@
                               @else
                               <div class="tag hot"><span>{{ round($discount) }} %</span></div>
                               @endif
-                              
-
                             </div> 
 
                           </div>
@@ -503,8 +457,8 @@
           </div>
           <!-- /.scroll-tabs --> 
 
-          <!-- ============================================== SCROLL TABS : END ============================================== --> 
-          <!-- ============================================== WIDE PRODUCTS ============================================== -->
+          <!-- ==================== SCROLL TABS : END ========================== --> 
+          <!-- ========================= WIDE PRODUCTS =========================== -->
  
           <div class="wide-banners wow fadeInUp outer-bottom-xs">
             <div class="row">
@@ -527,8 +481,8 @@
           </div>
           <!-- /.wide-banners --> 
           
-          <!-- ============================ WIDE PRODUCTS : END ========================= --> 
-          <!-- =========================== FEATURED PRODUCTS ========================== -->
+          <!-- =============== WIDE PRODUCTS : END =================== --> 
+          <!-- =================== FEATURED PRODUCTS ====================== -->
           <section class="section featured-product wow fadeInUp">
             <h3 class="section-title">Featured products</h3>
             <div class="owl-carousel home-owl-carousel custom-carousel owl-theme outer-top-xs">
@@ -593,7 +547,7 @@
             <!-- /.home-owl-carousel --> 
           </section>
           <!-- /.section --> 
-          <!-- ============================================== FEATURED PRODUCTS : END ============================================== --> 
+          <!-- =================== FEATURED PRODUCTS : END ===================== --> 
 
 
         <!-- == === skip product (first categroy products) == ==== -->

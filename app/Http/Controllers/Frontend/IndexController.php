@@ -28,7 +28,7 @@ class IndexController extends Controller
         $special_offers =Product::where('special_offer',1)->orderBy('id','DESC')->get();
         $special_deals =Product::where('special_deals',1)->orderBy('id','DESC')->get();
         $sliders = Slider::all();
-        $tags=Product::select('product_tags')->get();
+        
 
         // first category product view
         $skip_category_0 = Category::skip(0)->first();
@@ -42,7 +42,7 @@ class IndexController extends Controller
         $skip_brand_1 = Brand::skip(1)->first();
         $skip_brand_product_1 = Product::where('status',1)->where('brand_id',$skip_brand_1->id)->orderBy('id','DESC')->get();
 
-        return view('frontend.index',compact('categories','sliders','products','featured','hots','special_deals','special_offers','skip_category_0','skip_product_0','skip_category_1','skip_product_1','skip_brand_1','skip_brand_product_1','tags'));
+        return view('frontend.index',compact('categories','sliders','products','featured','hots','special_deals','special_offers','skip_category_0','skip_product_0','skip_category_1','skip_product_1','skip_brand_1','skip_brand_product_1'));
     } // end method
 
 
@@ -147,7 +147,7 @@ class IndexController extends Controller
         public function TagWiseProduct($tag){
             // for tag page 
            $categories = Category::orderBy('category_name', 'ASC')->get();
-           $products = Product::where('status', 1)->where('product_tags', $tag)->orderBy('id', 'DESC')->paginate(4);
+           $products = Product::where('status', 1)->where('product_tags', $tag)->orderBy('id', 'DESC')->paginate(2);
        
            return view('frontend.tags.tags_view', compact('products','categories'));
         }
