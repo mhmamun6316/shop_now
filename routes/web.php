@@ -180,3 +180,9 @@ Route::get('/product/detail/{id}', [IndexController::class, 'ProductDetail']);
 
 // Frontend tags route goes here
 Route::get('/product/tag/{tag}', [IndexController::class, 'TagWiseProduct']);
+
+// Frontend SubCategory route goes here
+Route::get('/subcategory/product/{subcat_id}', [IndexController::class, 'SubCatWiseProduct']);
+
+// Frontend Sub  SubSubCategory route goes here
+Route::get('/subsubcategory/product/{subsubcat_id}', [IndexController::class, 'SubSubCatWiseProduct']);

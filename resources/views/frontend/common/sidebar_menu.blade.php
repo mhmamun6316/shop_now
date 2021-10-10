@@ -40,7 +40,6 @@
                @foreach($subsubcategories as $subsubcategory)
                              
                   <ul class="links list-unstyled"> 
-                      
                     <li><a href="{{ url('subsubcategory/product/'.$subsubcategory->id) }}">{{ $subsubcategory->subsubcategory_name }}</a></li>                     
                   </ul>
                
