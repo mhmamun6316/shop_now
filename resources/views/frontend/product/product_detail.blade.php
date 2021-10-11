@@ -70,15 +70,15 @@
 
 
 					<div class="single-product-gallery-thumbs gallery-thumbs">
-					@foreach($multiImgs as $multiImg)
 						<div id="owl-single-product-thumbnails">
+					@foreach($multiImgs as $multiImg)
 							<div class="item">
 								<a class="horizontal-thumb active" data-target="#owl-single-product" data-slide="1" href="#slide{{ $multiImg->id }}">
 									<img class="img-responsive" width="85" alt="" src="{{ asset($multiImg->photo_name) }}" data-echo="{{ asset($multiImg->photo_name) }}" />
 								</a>
 							</div>
+					@endforeach		
 						</div><!-- /#owl-single-product-thumbnails -->
-					@endforeach
 					</div><!-- /.gallery-thumbs -->
 
 				</div><!-- /.single-product-gallery -->
@@ -202,13 +202,17 @@
 								                  <div class="arrow plus gradient"><span class="ir"><i class="icon fa fa-sort-asc"></i></span></div>
 								                  <div class="arrow minus gradient"><span class="ir"><i class="icon fa fa-sort-desc"></i></span></div>
 								                </div>
-								                <input type="text" value="1">
+								                <input type="text" value="1" id="qty" min="1">
 							              </div>
 							            </div>
 									</div>
-
+									
+									<input type="hidden" id="product_id" value="{{ $product->id }}" min="1"  >
 									<div class="col-sm-7">
-										<a href="#" class="btn btn-primary"><i class="fa fa-shopping-cart inner-right-vs"></i> ADD TO CART</a>
+
+										<button type="submit" class="btn btn-primary" onclick="addToCart()" >
+										<i class="fa fa-shopping-cart inner-right-vs"></i>Add to Cart</button>
+										
 									</div>
 
 									
@@ -374,78 +378,78 @@
 				</div><!-- /.product-tabs -->
 
 				<!-- ====================== UPSELL PRODUCTS =================== -->
-<section class="section featured-product wow fadeInUp">
-	<h3 class="section-title">upsell products</h3>
-	<div class="owl-carousel home-owl-carousel upsell-product custom-carousel owl-theme outer-top-xs">
-	@foreach ($relatedProducts as $relatedProduct )   	
-		<div class="item item-carousel">
-			<div class="products">
-				<div class="product">		
+			<section class="section featured-product wow fadeInUp">
+				<h3 class="section-title">upsell products</h3>
+				<div class="owl-carousel home-owl-carousel upsell-product custom-carousel owl-theme outer-top-xs">
+				@foreach ($relatedProducts as $relatedProduct )   	
+					<div class="item item-carousel">
+						<div class="products">
+							<div class="product">		
 
-					<div class="product-image">
-						<div class="image">
-							<a href="{{ url('product/detail/'.$relatedProduct->id ) }}"><img   src="{{ asset($relatedProduct->product_thambnail) }}" alt=""></a>
-						</div><!-- /.image -->			
-						
-						@php
-							$amount = $relatedProduct->selling_price - $relatedProduct->discount_price;
-							$discount = ($amount/$relatedProduct->selling_price) * 100;
-						 @endphp
+								<div class="product-image">
+									<div class="image">
+										<a href="{{ url('product/detail/'.$relatedProduct->id ) }}"><img   src="{{ asset($relatedProduct->product_thambnail) }}" alt=""></a>
+									</div><!-- /.image -->			
+									
+									@php
+										$amount = $relatedProduct->selling_price - $relatedProduct->discount_price;
+										$discount = ($amount/$relatedProduct->selling_price) * 100;
+									@endphp
 
-						<div>
-							@if($relatedProduct->discount_price == NULL)
-							<div class="tag new"><span style="font-size: 10px ">Not </span></div>
-							@else
-							<div class="tag hot"><span>{{ round($discount) }} %</span></div>
-							@endif
-						</div>
+									<div>
+										@if($relatedProduct->discount_price == NULL)
+										<div class="tag new"><span style="font-size: 10px ">Not </span></div>
+										@else
+										<div class="tag hot"><span>{{ round($discount) }} %</span></div>
+										@endif
+									</div>
 
-					</div><!-- /.product-image -->
+								</div><!-- /.product-image -->
 
-					<div class="product-info text-left">
-						<h3 class="name"><a href="{{ url('product/detail/'.$relatedProduct->id ) }}">{{ $relatedProduct->product_name }}</a></h3>
-						<div class="rating rateit-small"></div>
-						<div class="description"></div>
-						<div class="product-price">	
-							<span class="price">
-								${{ $relatedProduct->discount_price }}
-							</span>
-							<span class="price-before-discount">$ {{ $relatedProduct->selling_price }}</span>
-						</div><!-- /.product-price -->
-					</div><!-- /.product-info -->
+								<div class="product-info text-left">
+									<h3 class="name"><a href="{{ url('product/detail/'.$relatedProduct->id ) }}">{{ $relatedProduct->product_name }}</a></h3>
+									<div class="rating rateit-small"></div>
+									<div class="description"></div>
+									<div class="product-price">	
+										<span class="price">
+											${{ $relatedProduct->discount_price }}
+										</span>
+										<span class="price-before-discount">$ {{ $relatedProduct->selling_price }}</span>
+									</div><!-- /.product-price -->
+								</div><!-- /.product-info -->
 
-					<div class="cart clearfix animate-effect">
-						<div class="action">
-							<ul class="list-unstyled">
-								<li class="add-cart-button btn-group">
-									<button class="btn btn-primary icon" data-toggle="dropdown" type="button">
-										<i class="fa fa-shopping-cart"></i>													
-									</button>
-									<button class="btn btn-primary cart-btn" type="button">Add to cart</button>
-															
-								</li>
-							
-								<li class="lnk wishlist">
-									<a class="add-to-cart" href="detail.html" title="Wishlist">
-										<i class="icon fa fa-heart"></i>
-									</a>
-								</li>
+								<div class="cart clearfix animate-effect">
+									<div class="action">
+										<ul class="list-unstyled">
+											<li class="add-cart-button btn-group">
+												<button class="btn btn-primary icon" data-toggle="dropdown" type="button">
+													<i class="fa fa-shopping-cart"></i>													
+												</button>
+												<button class="btn btn-primary cart-btn" type="button">Add to cart</button>
+																		
+											</li>
+										
+											<li class="lnk wishlist">
+												<a class="add-to-cart" href="detail.html" title="Wishlist">
+													<i class="icon fa fa-heart"></i>
+												</a>
+											</li>
 
-								<li class="lnk">
-									<a class="add-to-cart" href="detail.html" title="Compare">
-										<i class="fa fa-signal"></i>
-									</a>
-								</li>
-							</ul>
-						</div><!-- /.action -->
-					</div><!-- /.cart -->
-				</div><!-- /.product -->
-			</div><!-- /.products -->
-		</div><!-- /.item -->
-	@endforeach
-	</div><!-- /.home-owl-carousel -->
-</section><!-- /.section -->
-<!-- ============================================== UPSELL PRODUCTS : END ============================================== -->
+											<li class="lnk">
+												<a class="add-to-cart" href="detail.html" title="Compare">
+													<i class="fa fa-signal"></i>
+												</a>
+											</li>
+										</ul>
+									</div><!-- /.action -->
+								</div><!-- /.cart -->
+							</div><!-- /.product -->
+						</div><!-- /.products -->
+					</div><!-- /.item -->
+				@endforeach
+				</div><!-- /.home-owl-carousel -->
+			</section><!-- /.section -->
+<!-- ========================== UPSELL PRODUCTS : END ================================ -->
 			
 			</div><!-- /.col -->
 			<div class="clearfix"></div>

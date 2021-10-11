@@ -42,20 +42,20 @@
       <!-- /.container --> 
     </div>
     <!-- /.header-top --> 
-    <!-- ============================================== TOP MENU : END ============================================== -->
+    <!-- ====================== TOP MENU : END ======================== -->
     <div class="main-header">
       <div class="container">
         <div class="row">
           <div class="col-xs-12 col-sm-12 col-md-3 logo-holder"> 
-            <!-- ============================================================= LOGO ============================================================= -->
+            <!-- ========================== LOGO ================================ -->
             <div class="logo"> <a href="{{ ('/' )}}"> <img src=" {{ asset('frontend/assets/images/logo.png ')}} " alt="logo"> </a> </div>
             <!-- /.logo --> 
-            <!-- ============================================================= LOGO : END ============================================================= --> </div>
+            <!-- =========================== LOGO : END ================================ --> </div>
           <!-- /.logo-holder -->
           
           <div class="col-xs-12 col-sm-12 col-md-7 top-search-holder"> 
             <!-- /.contact-row --> 
-            <!-- ============================================================= SEARCH AREA ============================================================= -->
+            <!-- =============================== SEARCH AREA ================================= -->
             <div class="search-area">
               <form>
                 <div class="control-group">
@@ -75,11 +75,11 @@
               </form>
             </div>
             <!-- /.search-area --> 
-            <!-- ============================================================= SEARCH AREA : END ============================================================= --> </div>
+            <!-- =========================== SEARCH AREA : END ========================= --> </div>
           <!-- /.top-search-holder -->
           
           <div class="col-xs-12 col-sm-12 col-md-2 animate-dropdown top-cart-row"> 
-            <!-- ============================================================= SHOPPING CART DROPDOWN ============================================================= -->
+            <!-- ======================= SHOPPING CART DROPDOWN ================================== -->
             
             <div class="dropdown dropdown-cart"> <a href="#" class="dropdown-toggle lnk-cart" data-toggle="dropdown">
               <div class="items-cart-inner">
@@ -90,21 +90,14 @@
               </a>
               <ul class="dropdown-menu">
                 <li>
-                  <div class="cart-item product-summary">
-                    <div class="row">
-                      <div class="col-xs-4">
-                        <div class="image"> <a href="detail.html"><img src=" {{ asset('frontend/assets/images/cart.jpg ' ) }} " alt=""></a> </div>
-                      </div>
-                      <div class="col-xs-7">
-                        <h3 class="name"><a href="index.php?page-detail">Simple Product</a></h3>
-                        <div class="price">$600.00</div>
-                      </div>
-                      <div class="col-xs-1 action"> <a href="#"><i class="fa fa-trash"></i></a> </div>
-                    </div>
+
+                  {{-- mini cat start with ajax --}}
+                  <div id="miniCart"> 
+                  
                   </div>
+                 {{-- mini cat end with ajax --}}
+
                   <!-- /.cart-item -->
-                  <div class="clearfix"></div>
-                  <hr>
                   <div class="clearfix cart-total">
                     <div class="pull-right"> <span class="text">Sub Total :</span><span class='price'>$600.00</span> </div>
                     <div class="clearfix"></div>
@@ -117,7 +110,7 @@
             </div>
             <!-- /.dropdown-cart --> 
             
-            <!-- ============================================================= SHOPPING CART DROPDOWN : END============================================================= --> </div>
+            <!-- =================== SHOPPING CART DROPDOWN : END============== --> </div>
           <!-- /.top-cart-row --> 
         </div>
         <!-- /.row --> 
@@ -128,7 +121,7 @@
     </div>
     <!-- /.main-header --> 
     
-    <!-- ============================================== NAVBAR ============================================== -->
+    <!-- =================== NAVBAR ====================== -->
     <div class="header-nav animate-dropdown">
       <div class="container">
         <div class="yamm navbar navbar-default" role="navigation">

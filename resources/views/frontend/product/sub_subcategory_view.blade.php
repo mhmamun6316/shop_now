@@ -404,17 +404,15 @@
                               </div>
                               <!-- /.col --> 
                             </div>
-                      
-                      
-                      
+
                                @php
                               $amount = $product->selling_price - $product->discount_price;
                               $discount = ($amount/$product->selling_price) * 100;
                               @endphp    
                       
-                                            <!-- /.product-list-row -->
-                                            <div class="tag new"><span>new</span></div>
-                                            <div>
+                                <!-- /.product-list-row -->
+                                <div class="tag new"><span>new</span></div>
+                                <div>
                                   @if ($product->discount_price == NULL)
                                   <div class="tag new"><span>new</span></div>
                                   @else
@@ -422,14 +420,12 @@
                                   @endif
                                 </div>
                       
-                      
-                      
-                                          </div>
-                                          <!-- /.product-list --> 
-                                        </div>
-                                        <!-- /.products --> 
-                                      </div>
-                                      <!-- /.category-product-inner -->
+                                </div>
+                                <!-- /.product-list --> 
+                              </div>
+                              <!-- /.products --> 
+                            </div>
+                            <!-- /.category-product-inner -->
                       
                           @endforeach
                      
