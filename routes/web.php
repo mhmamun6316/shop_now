@@ -10,9 +10,10 @@ use App\Http\Controllers\Backend\SubCategoryController;
 use App\Http\Controllers\Backend\ProductController; 
 use App\Http\Controllers\Backend\SliderController;
 use App\Http\Controllers\Frontend\CartController;
-
+use App\Http\Controllers\Frontend\WishlistController;
 use App\Http\Controllers\Frontend\IndexController;
-
+use App\Http\Controllers\Frontend\PageCartController;
+use App\Http\Controllers\Backend\CouponController;
 use App\Models\User;
 
 
@@ -196,3 +197,47 @@ Route::post('/cart/data/store/{id}', [CartController::class, 'AddToCart']);
 
 // Product mini Cart ajax route goes here
 Route::get('/product/mini/cart/', [CartController::class, 'AddMiniCart']);
+
+
+// Remove mini cart product
+Route::get('/minicart/product-remove/{rowId}', [CartController::class, 'RemoveMiniCart']);
+
+
+
+######### Start Product wishlist only view Auth user in use middleware ###########
+// Route::group(['prefix'=>'user','middleware' => ['user','auth'],'namespace'=>'User'],function(){
+
+// Add to Wishlist product
+Route::post('/add-to-wishlist/{product_id}', [CartController::class, 'AddToWishlist']); 
+
+// Product Wishlist page
+Route::get('/wishlist', [WishlistController::class, 'ViewWishlist'])->name('wishlist');
+  
+// Product Wishlist show data
+Route::get('/get-wishlist-product', [WishlistController::class, 'GetWishlistProduct']);
+
+// Remove  Wishlist Product
+Route::get('/wishlist-remove/{id}', [WishlistController::class, 'RemoveWishlistProduct']); 
+  
+  // }); ####### End Product wishlist only view Auth user in use middleware  #############
+
+
+// My cart Page view
+Route::get('/mycart', [PageCartController::class, 'MyCart'])->name('mycart');
+//product get into cart 
+Route::get('/get-cart-product', [PageCartController::class, 'GetCartProduct']);
+//reove from cart view product
+Route::get('/cart-remove/{rowId}', [PageCartController::class, 'RemoveMyCart']);
+//product increment button route
+Route::get('/cart-increment/{rowId}', [PageCartController::class, 'CartIncrement']);
+//product decrement button route
+Route::get('/cart-decrement/{rowId}', [PageCartController::class, 'CartDecrement']);
+
+
+
+/////////////////////////////////Cupon/////////////////////////////////////////
+Route::get('coupon/view', [CouponController::class, 'CouponView'])->name('manage.coupon'); 
+Route::post('coupon/coupon-apply', [CouponController::class, 'CouponStore'])->name('coupon.add'); 
+Route::get('coupon/edit/{id}', [CouponController::class, 'CouponEdit'])->name('coupon.edit'); 
+Route::post('coupon/update', [CouponController::class, 'CouponUpdate'])->name('coupon.update');
+Route::get('coupon/coupon-remove/{id}', [CouponController::class, 'CouponDelete'])->name('coupon.delete');
