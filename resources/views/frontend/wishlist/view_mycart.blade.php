@@ -5,7 +5,11 @@
     My cart Page
 @endsection
 
-
+<style>
+    .CenterLine td{
+        text-align: center;
+    }
+</style>
 <div class="breadcrumb">
     <div class="container">
         <div class="breadcrumb-inner">
@@ -40,8 +44,6 @@
 
 
                             </tbody>
-
-
                         </table>
                     </div>
                 </div>

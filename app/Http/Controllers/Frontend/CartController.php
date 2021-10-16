@@ -28,8 +28,8 @@ class CartController extends Controller
               'weight' => 1,
               'options' => [
                   'image' => $product->product_thambnail,
-                  'color' => $product->product_color,
-                  'size' => $product->product_size,  
+                  'color' => $request->color,
+                  'size' => $request->size, 
               ],
                 ]);
             
@@ -45,8 +45,8 @@ class CartController extends Controller
                 'weight' => 1,
                 'options' => [
                     'image' => $product->product_thambnail,
-                    'color' => $product->product_color,
-                    'size' => $product->product_size,
+                    'color' => $request->color,
+                    'size' => $request->size,
                 ],
                   ]);
 

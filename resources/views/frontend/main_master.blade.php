@@ -177,7 +177,7 @@
                     $('#pcode').text(data.product.product_code);
 
                     $('#pcategory').text(data.product.category.category_name);
-                    $('#pbrand').text(data.product.brand.brand_name_easy);
+                    $('#pbrand').text(data.product.brand.brand_name);
                     $('#pstock').text(data.product.product_qty);
                     // img 
                     $('#pimg').attr('src', '/' + data.product.product_thambnail);
@@ -234,9 +234,7 @@
                     $.each(data.size, function(key, value) {
                         $('select[name="size"]').append('<option value=" ' + value + ' " > ' + value +
                             ' </option>')
-
                         // product size =null then hide is option
-
                         if (data.size == "") {
                             $('#sizeArea').hide();
 
@@ -439,7 +437,6 @@
                     }
                     // End Message 
 
-
                 }
             })
         }
@@ -524,154 +521,152 @@
     </script>
     <!--  ///  Wishlist Function End  ////   -->
 
-      <!--  ///  My Cat Function start  ////   -->
-      <script type="text/javascript">
-         function cart(){
+    <!--  ///  My Cat Function start  ////   -->
+    <script type="text/javascript">
+        function cart() {
             $.ajax({
-                  type: 'GET',
-                  url: '/get-cart-product',
-                  dataType:'json',
-                  success:function(response){
-                     var rows = ""
-                     // use carts auto load
-                     $.each(response.carts, function(key,value){
-                        rows += `<tr>
-                        <td class="col-md-2"><img src="/${value.options.image} " alt="imga" style="width:60px; height:60px;"></td>
+                type: 'GET',
+                url: '/get-cart-product',
+                dataType: 'json',
+                success: function(response) {
+                    var rows = ""
+                    // use carts auto load
+                    $.each(response.carts, function(key, value) {
+                        rows += `<tr class="CenterLine">
+                        <td><img src="/${value.options.image} " alt="imga" style="width:60px; height:60px;"></td>
                        
-                        <td class="col-md-7">
+                        <td>
                               <div class="product-name"><a href="#">${value.name}</a></div>
                               
                               <div class="price">
-                                 ${value.price}
+                                 $${value.price}
                               </div>
                             </td>
 
 
-                        <td class="col-md-2">
+                        <td>
                         <strong>${value.options.color} </strong> 
                         </td>
-                        <td class="col-md-2">
-                     ${value.options.size == null
-                        ? `<span> Null </span>`
-                        :
-                     `<strong>${value.options.size} </strong>` 
-                     }           
+                        <td>
+                        ${value.options.size == null
+                            ? `<span> Null </span>`
+                            :
+                        `<strong>${value.options.size} </strong>` 
+                        }           
+                            </td>
+
+                        <td>
+                            ${value.qty > 1
+                            ? `<button type="submit" class="btn btn-danger btn-sm" id="${value.rowId}" onclick="cartDecrement(this.id)" >-</button> `
+                            : `<button type="submit" class="btn btn-danger btn-sm" disabled >-</button> `
+                            }
+
+                            <input type="text" value="${value.qty}" min="1" max="5000" disabled="" style="width:35px;" >
+
+                            <button type="submit" class="btn btn-success btn-large"  id="${value.rowId}" onclick="cartIncrement(this.id)">+</button>  
+
+                        </td>
+                            
+                        <td>
+                            <strong>$${value.subtotal} </strong> 
                         </td>
 
-                        <td class="col-md-2">
-
-         
-                           ${value.qty > 1
-            ? `<button type="submit" class="btn btn-danger btn-sm" id="${value.rowId}" onclick="cartDecrement(this.id)" >-</button> `
-            : `<button type="submit" class="btn btn-danger btn-sm" disabled >-</button> `
-            }
-
-        <input type="text" value="${value.qty}" min="1" max="5000" disabled="" style="width:35px;" >
-
-        <button type="submit" class="btn btn-success btn-large"  id="${value.rowId}" onclick="cartIncrement(this.id)">+</button>  
-
-            </td>
-                        
-            <td class="col-md-2">
-            <strong>$${value.subtotal} </strong> 
-            </td>
-
-         
-            <td class="col-md-1 close-btn">
-               <button type="submit" class="" id="${value.rowId}" onclick="cartRemove(this.id)"><i class="fa fa-times"></i></button>
-            </td>
+            
+                        <td class="close-btn">
+                        <button type="submit" class="" id="${value.rowId}" onclick="cartRemove(this.id)"><i class="fa fa-times"></i></button>
+                        </td>
                      </tr>`
-            });
-                     
-                     $('#cartPage').html(rows);
-                  }
+                    });
+
+                    $('#cartPage').html(rows);
+                }
             })
-         }
-         
-         cart(); // end function
+        }
+
+        cart(); // end function
 
 
 
 
-      ///  my cart remove Start 
-      function cartRemove(id){
-         $.ajax({
-               type: 'GET',
-               url: '/cart-remove/'+id,
-               dataType:'json',
-               success:function(data){                  
-                  // couponCalculation();
-                  cart();
-                  miniCart()
+        ///  my cart remove Start 
+        function cartRemove(id) {
+            $.ajax({
+                type: 'GET',
+                url: '/cart-remove/' + id,
+                dataType: 'json',
+                success: function(data) {
+                    // couponCalculation();
+                    cart();
+                    miniCart()
 
-                  $('#couponField').show();
-                  $('#coupon_name').val('');
+                    $('#couponField').show();
+                    $('#coupon_name').val('');
 
-               // Start Message 
-                  const Toast = Swal.mixin({
+                    // Start Message 
+                    const Toast = Swal.mixin({
                         toast: true,
                         position: 'top-end',
-                        
+
                         showConfirmButton: false,
                         timer: 3000
-                     })
-                  if ($.isEmptyObject(data.error)) {
-                     Toast.fire({
-                           type: 'success',
-                           icon: 'success',
-                           title: data.success
-                     })
-                  }else{
-                     Toast.fire({
-                           type: 'error',
-                           icon: 'error',
-                           title: data.error
-                     })
-                  }
-                  // End Message 
-               }
-         });
-      }
-      // End my cart remove 
-
-
-            // -------- CART INCREMENT --------//
-         function cartIncrement(rowId){
-            $.ajax({
-                  type:'GET',
-                  url: "/cart-increment/"+rowId,
-                  dataType:'json',
-                  success:function(data){
-                     
-                     //coupon update price auto
-                     // couponCalculation();
-
-                     cart();
-                     miniCart();
-                  }
+                    })
+                    if ($.isEmptyObject(data.error)) {
+                        Toast.fire({
+                            type: 'success',
+                            icon: 'success',
+                            title: data.success
+                        })
+                    } else {
+                        Toast.fire({
+                            type: 'error',
+                            icon: 'error',
+                            title: data.error
+                        })
+                    }
+                    // End Message 
+                }
             });
-         }
-      // ---------- END CART INCREMENT -----///
+        }
+        // End my cart remove 
 
 
-      // -------- CART Decrement  --------//
-      function cartDecrement(rowId){
+        // -------- CART INCREMENT --------//
+        function cartIncrement(rowId) {
             $.ajax({
-                  type:'GET',
-                  url: "/cart-decrement/"+rowId,
-                  dataType:'json',
-                  success:function(data){
+                type: 'GET',
+                url: "/cart-increment/" + rowId,
+                dataType: 'json',
+                success: function(data) {
 
-                     // auto coupon update price
-                     // couponCalculation();
-                     cart();
-                     miniCart();
-                  }
+                    //coupon update price auto
+                    // couponCalculation();
+
+                    cart();
+                    miniCart();
+                }
             });
-         }
-      // ---------- END CART Decrement -----///
-      </script> 
-   <!-- my cart function End -->
+        }
+        // ---------- END CART INCREMENT -----///
+
+
+        // -------- CART Decrement  --------//
+        function cartDecrement(rowId) {
+            $.ajax({
+                type: 'GET',
+                url: "/cart-decrement/" + rowId,
+                dataType: 'json',
+                success: function(data) {
+
+                    // auto coupon update price
+                    // couponCalculation();
+                    cart();
+                    miniCart();
+                }
+            });
+        }
+        // ---------- END CART Decrement -----///
+    </script>
+    <!-- my cart function End -->
 
 
 </body>

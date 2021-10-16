@@ -116,11 +116,6 @@ Route::prefix('product')->group(function () {
   Route::get('/view', [ProductController::class, 'ProductView'])->name('all.product'); 
   Route::get('/view/info/{id}', [ProductController::class, 'ProductInfoView'])->name('product.all_info_view');
 
-  
-  // Route::get('/edit/{id}', [BrandController::class, 'BrandEdit'])->name('edit.brand'); 
-  // Route::post('/update', [BrandController::class, 'BrandUpdate'])->name('update.brand');
-  // Route::get('/delete/{id}', [BrandController::class, 'BrandDelete'])->name('delete.brand'); 
-
   Route::get('/deactive/{id}', [ProductController::class, 'ProductDeactive'])->name('product.deactive'); 
   Route::get('/active/{id}', [ProductController::class, 'ProductActive'])->name('product.active');
    

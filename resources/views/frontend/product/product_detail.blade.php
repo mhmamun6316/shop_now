@@ -213,14 +213,7 @@
                                             <div class="col-sm-2">
                                                 <div class="cart-quantity">
                                                     <div class="quant-input">
-                                                        <div class="arrows">
-                                                            <div class="arrow plus gradient"><span class="ir"><i
-                                                                        class="icon fa fa-sort-asc"></i></span></div>
-                                                            <div class="arrow minus gradient"><span
-                                                                    class="ir"><i
-                                                                        class="icon fa fa-sort-desc"></i></span></div>
-                                                        </div>
-                                                        <input type="text" value="1" id="qty" min="1">
+                                                        <input type="number" class="form-control" id="qty" value="1" min="1">
                                                     </div>
                                                 </div>
                                             </div>
