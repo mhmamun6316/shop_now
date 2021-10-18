@@ -2,6 +2,12 @@
 
 @section('content')
 
+<style>
+    .row-align{
+        display: flex;
+        align-items: center;
+    }
+</style>
     <div class="breadcrumb">
         <div class="container">
             <div class="breadcrumb-inner">
@@ -104,6 +110,7 @@
                             </div>
                             <!-- /.sidebar-widget -->
                             <!-- ================== PRICE SILDER : END ================== -->
+
                             <!-- ==================== MANUFACTURES==================== -->
                             <div class="sidebar-widget wow fadeInUp">
                                 <div class="widget-header">
@@ -384,7 +391,7 @@
                                         <div class="category-product-inner wow fadeInUp">
                                             <div class="products">
                                                 <div class="product-list product">
-                                                    <div class="row product-list-row">
+                                                    <div class="row product-list-row row-align">
                                                         <div class="col col-sm-4 col-lg-4">
                                                             <div class="product-image">
                                                                 <div class="image"> <img
@@ -397,17 +404,10 @@
                                                         <!-- /.col -->
                                                         <div class="col col-sm-8 col-lg-8">
                                                             <div class="product-info">
-                                                                <h3 class="name"><a href="detail.html">Floral
-                                                                        Print Buttoned</a></h3>
                                                                 <h3 class="name"><a
                                                                         href="{{ url('product/details/' . $product->id) }}">
                                                                         {{ $product->product_name }} </a></h3>
                                                                 <div class="rating rateit-small"></div>
-
-                                                                <div class="product-price"> <span class="price">
-                                                                        $450.99 </span>
-                                                                    <span class="price-before-discount">$ 800</span>
-                                                                </div>
 
 
                                                                 @if ($product->discount_price == null)
@@ -422,14 +422,7 @@
                                                                             {{ $product->selling_price }}</span>
                                                                     </div>
                                                                 @endif
-
-                                                                <!-- /.product-price -->
-                                                                <div class="description m-t-10">Suspendisse posuere arcu
-                                                                    diam, id accumsan eros pharetra ac. Nulla enim risus,
-                                                                    facilisis bibendum gravida eget, lacinia id purus.
-                                                                    Suspendisse posuere arcu diam, id accumsan eros pharetra
-                                                                    ac. Nulla enim risus, facilisis bibendum gravida eget.
-                                                                </div>
+                                                                
                                                                 <div class="description m-t-10">
                                                                     @if (session()->get('language') == 'hindi') {{ $product->short_descp_hin }} @else {{ $product->short_descp_en }} @endif</div>
                                                                 <div class="cart clearfix animate-effect">

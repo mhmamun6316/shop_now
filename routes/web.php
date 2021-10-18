@@ -136,6 +136,13 @@ Route::prefix('product')->group(function () {
   
    });// Admin Slider All Route Group End 
 
+   /////////////////////////////////Cupon/////////////////////////////////////////
+  Route::get('coupon/view', [CouponController::class, 'CouponView'])->name('manage.coupon'); 
+  Route::post('coupon/coupon-apply', [CouponController::class, 'CouponStore'])->name('coupon.add'); 
+  Route::get('coupon/edit/{id}', [CouponController::class, 'CouponEdit'])->name('coupon.edit'); 
+  Route::post('coupon/update', [CouponController::class, 'CouponUpdate'])->name('coupon.update');
+  Route::get('coupon/coupon-remove/{id}', [CouponController::class, 'CouponDelete'])->name('coupon.delete');
+
 }); 
 
 
@@ -228,11 +235,10 @@ Route::get('/cart-increment/{rowId}', [PageCartController::class, 'CartIncrement
 //product decrement button route
 Route::get('/cart-decrement/{rowId}', [PageCartController::class, 'CartDecrement']);
 
+// route for coupons of mycart
+
+Route::post('/coupon_apply',[CartController::class,'CouponApply']);
+Route::get('/coupon-calculation',[CartController::class,'CouponCalculation']);
+Route::get('/coupon-remove',[CartController::class,'CouponRemove']);
 
 
-/////////////////////////////////Cupon/////////////////////////////////////////
-Route::get('coupon/view', [CouponController::class, 'CouponView'])->name('manage.coupon'); 
-Route::post('coupon/coupon-apply', [CouponController::class, 'CouponStore'])->name('coupon.add'); 
-Route::get('coupon/edit/{id}', [CouponController::class, 'CouponEdit'])->name('coupon.edit'); 
-Route::post('coupon/update', [CouponController::class, 'CouponUpdate'])->name('coupon.update');
-Route::get('coupon/coupon-remove/{id}', [CouponController::class, 'CouponDelete'])->name('coupon.delete');

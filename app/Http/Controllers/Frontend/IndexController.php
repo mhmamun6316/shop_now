@@ -167,7 +167,12 @@ class IndexController extends Controller
 
          // Subcategory wise product
         public function SubCatWiseProduct($subcat_id){
+
+            // $start = 27000; // min price value
+            // $end =  40000; // max price value where('discount_price', '>=', $start)->where('discount_price', '<=', $end)->
+
             $products = Product::where('status',1)->where('subcategory_id',$subcat_id)->orderBy('id','DESC')->paginate(4);
+
             $categories = Category::orderBy('category_name','ASC')->get();
             return view('frontend.product.subcategory_view',compact('products','categories'));
         }

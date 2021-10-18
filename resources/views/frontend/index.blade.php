@@ -265,7 +265,7 @@
                                                 <div class="products">
                                                     <div class="product">
                                                         <div class="product-image">
-                                                            <div class="image"> <a href="detail.html"><img
+                                                            <div class="image"> <a href="{{ url('product/detail/' . $product->id) }}"><img
                                                                         src="{{ asset($product->product_thambnail) }}"
                                                                         alt=""></a> </div>
                                                             <!-- /.image -->
