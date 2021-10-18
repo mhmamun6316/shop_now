@@ -3,19 +3,17 @@
 
 @section('admin')
 
-
     <div class="container-full">
 
         <!-- Main content -->
         <section class="content">
             <div class="row">
 
-
                 <div class="col-8">
 
                     <div class="box">
                         <div class="box-header with-border">
-                            <h3 class="box-title"> All Brands</h3>
+                            <h3 class="box-title"> All Coupons</h3>
                         </div>
                         <!-- /.box-header -->
                         <div class="box-body">
@@ -36,8 +34,6 @@
 
                                         @foreach ($coupons as $item)
                                             <tr>
-
-
                                                 <td> {{ $item->coupon_name }} </td>
 
                                                 <td> {{ $item->coupon_discount }} </td>
@@ -53,14 +49,11 @@
                                                 </td>
 
                                                 <td>
-
                                                     <a href="{{ route('coupon.edit', $item->id) }}"
-                                                        class="btn btn-success"> Edit </a>
+                                                        class="btn btn-success btn-sm"> Edit </a>
 
                                                     <a href="{{ route('coupon.delete', $item->id) }}"
-                                                        class="btn btn-danger">Delete</a>
-
-                                                    {{-- <button type="submit" id="deleteButton" data-name="{{ $item->id }}" class="btn btn-xs btn-danger">Delete</button> --}}
+                                                        class="btn btn-danger btn-sm">Delete</a>
                                                 </td>
 
 
@@ -86,7 +79,7 @@
                 <div class="col-4">
                     <div class="box">
                         <div class="box-header with-border">
-                            <h3 class="box-title">Coupon Edit</h3>
+                            <h3 class="box-title">Coupon Add</h3>
                         </div>
                         <!-- /.box-header -->
                         <div class="box-body">

@@ -26,9 +26,6 @@
 
                                 <input type="hidden" name="id" value="{{ $coupons->id }}">
 
-
-
-
                                 <div class="form-group">
                                     <h5>Coupon Name <span class="text-danger">*</span></h5>
                                     <div class="controls">

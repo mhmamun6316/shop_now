@@ -14,6 +14,7 @@ use App\Http\Controllers\Frontend\WishlistController;
 use App\Http\Controllers\Frontend\IndexController;
 use App\Http\Controllers\Frontend\PageCartController;
 use App\Http\Controllers\Backend\CouponController;
+use App\Http\Controllers\Backend\ShippingController;
 use App\Models\User;
 
 
@@ -136,12 +137,34 @@ Route::prefix('product')->group(function () {
   
    });// Admin Slider All Route Group End 
 
-   /////////////////////////////////Cupon/////////////////////////////////////////
-  Route::get('coupon/view', [CouponController::class, 'CouponView'])->name('manage.coupon'); 
-  Route::post('coupon/coupon-apply', [CouponController::class, 'CouponStore'])->name('coupon.add'); 
-  Route::get('coupon/edit/{id}', [CouponController::class, 'CouponEdit'])->name('coupon.edit'); 
-  Route::post('coupon/update', [CouponController::class, 'CouponUpdate'])->name('coupon.update');
-  Route::get('coupon/coupon-remove/{id}', [CouponController::class, 'CouponDelete'])->name('coupon.delete');
+   // Admin Coupon route start here
+  Route::prefix('coupon')->group(function () {
+
+  Route::get('/coupon/view', [CouponController::class, 'CouponView'])->name('manage.coupon'); 
+  Route::post('/coupon/coupon_apply', [CouponController::class, 'CouponStore'])->name('coupon.add'); 
+  Route::get('/coupon/edit/{id}', [CouponController::class, 'CouponEdit'])->name('coupon.edit'); 
+  Route::post('/coupon/update', [CouponController::class, 'CouponUpdate'])->name('coupon.update');
+  Route::get('/coupon/coupon_remove/{id}', [CouponController::class, 'CouponDelete'])->name('coupon.delete');
+
+  });// Admin oupon All Route Group End 
+
+  // Admin shipping route start here
+  Route::prefix('shipping')->group(function () {
+
+    Route::get('/division/view', [ShippingController::class, 'DivisionView'])->name('manage.division'); 
+    Route::post('/division/store', [ShippingController::class, 'DivisionStore'])->name('add.division');
+    Route::get('/division/edit/{id}', [ShippingController::class, 'DivisionEdit'])->name('division.edit');
+    Route::post('/division/update', [ShippingController::class, 'DivisionUpdate'])->name('division.update');
+    Route::get('/division/delete/{id}', [ShippingController::class, 'DivisionDelete'])->name('division.delete');
+
+     
+    Route::get('/district/view', [ShippingController::class, 'DistrictView'])->name('manage.district');
+    Route::post('/district/store', [ShippingController::class, 'DistrictStore'])->name('district.store');
+
+    Route::get('/state/view', [ShippingController::class, 'StateView'])->name('manage.state'); 
+    
+  
+    });// Admin shipping All Route Group End 
 
 }); 
 
