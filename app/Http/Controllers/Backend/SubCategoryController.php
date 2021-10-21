@@ -133,10 +133,6 @@ class SubCategoryController extends Controller
      } // end method
 
 
-
-
-
-
     // sub sub category store
      public function SubSubCategoryStore(Request $request){
 
@@ -195,8 +191,6 @@ class SubCategoryController extends Controller
             'subsubcategory_name' => $request->subsubcategory_name,
 
             'subsubcategory_slug' => strtolower(str_replace(' ', '-',$request->subsubcategory_name)),
-
-
 
             ]);
 

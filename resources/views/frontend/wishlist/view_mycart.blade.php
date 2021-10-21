@@ -99,9 +99,8 @@
                             <tr>
                                 <td>
                                     <div class="cart-checkout-btn pull-right">
-                                        <a href="" type="submit"
+                                        <a href="{{ route('checkout') }}" type="submit"
                                             class="btn btn-primary checkout-btn">PROCCED TO CHEKOUT</a>
-                                            {{-- {{ route('checkout') }} --}}
                                     </div>
                                 </td>
                             </tr>

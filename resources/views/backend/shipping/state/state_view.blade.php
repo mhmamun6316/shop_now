@@ -12,13 +12,11 @@
         <section class="content">
             <div class="row">
 
-
-
                 <div class="col-8">
 
                     <div class="box">
                         <div class="box-header with-border">
-                            <h3 class="box-title">Sub->SubCategory List</h3>
+                            <h3 class="box-title">State List</h3>
                         </div>
                         <!-- /.box-header -->
                         <div class="box-body">
@@ -26,28 +24,28 @@
                                 <table id="example1" class="table table-bordered table-striped">
                                     <thead>
                                         <tr>
-                                            <th>Category </th>
-                                            <th>SubCategory Name</th>
-                                            <th>Sub-Subcategory </th>
+                                            <th>Division Name</th>
+                                            <th>District Name</th>
+                                            <th>State Name</th>
                                             <th>Action</th>
 
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach ($subsubcategory as $item)
+                                        @foreach ($states as $item)
                                             <tr>
-                                                <td> {{ $item['category']['category_name'] }} </td>
+                                                <td> {{ $item['ShipDivision']['division_name'] }} </td>
 
-                                                <td>{{ $item['subcategory']['subcategory_name'] }}</td>
+                                                <td>{{ $item['ShipDistrict']['district'] }}</td>
 
-                                                <td>{{ $item->subsubcategory_name }}</td>
+                                                <td>{{ $item->state_name }}</td>
 
                                                 <td width="30%">
-                                                    <a href="{{ route('subsubcategory.edit', $item->id) }}"
+                                                    <a href="{{ route('state.edit',$item->id) }}"
                                                         class="btn btn-info" title="Edit Data"><i
                                                             class="fa fa-pencil"></i> </a>
 
-                                                    <a href="{{ route('subsubcategory.delete', $item->id) }}"
+                                                    <a href="{{ route('state.delete',$item->id) }}"
                                                         class="btn btn-danger" title="Delete Data" id="#">
                                                         <i class="fa fa-trash"></i></a>
                                                 </td>
@@ -68,38 +66,32 @@
                 <!-- /.col -->
 
 
-                <!--   ------------ Add Category Page -------- -->
+                <!--   ------------ Add State Page -------- -->
 
 
                 <div class="col-4">
 
                     <div class="box">
                         <div class="box-header with-border">
-                            <h3 class="box-title">Add Sub-SubCategory </h3>
+                            <h3 class="box-title">Add State</h3>
                         </div>
                         <!-- /.box-header -->
                         <div class="box-body">
                             <div class="table-responsive">
-
-
-                                <form method="post" action="{{ route('subsubcategory.store') }}">
+                                <form method="post" action="{{ route('state.store') }}">
                                     @csrf
 
-
                                     <div class="form-group">
-                                        <h5>Category Select <span class="text-danger">*</span></h5>
+                                        <h5>Division Select <span class="text-danger">*</span></h5>
                                         <div class="controls">
-                                            <select name="category_id" class="form-control">
-
-                                                <option value="" selected="" disabled="">Select Category</option>
-
-                                                @foreach ($categories as $category)
-                                                    <option value="{{ $category->id }}">{{ $category->category_name }}
+                                            <select name="division_id" class="form-control">
+                                                <option value="" selected="" disabled="">Select Division</option>
+                                                @foreach ($divisions as $division)
+                                                    <option value="{{ $division->id }}">{{ $division->division_name }}
                                                     </option>
                                                 @endforeach
-
                                             </select>
-                                            @error('category_id')
+                                            @error('division_id')
                                                 <span class="text-danger">{{ $message }}</span>
                                             @enderror
                                         </div>
@@ -107,13 +99,12 @@
 
 
                                     <div class="form-group">
-                                        <h5>SubCategory Select <span class="text-danger">*</span></h5>
+                                        <h5>District Select <span class="text-danger">*</span></h5>
                                         <div class="controls">
-                                            <select name="subcategory_id" class="form-control">
-                                                <option value="" selected="" disabled="">Select SubCategory</option>
-
+                                            <select name="district_id" class="form-control">
+                                                <option value="" selected="" disabled="">Select District</option>
                                             </select>
-                                            @error('subcategory_id')
+                                            @error('district_id')
                                                 <span class="text-danger">{{ $message }}</span>
                                             @enderror
                                         </div>
@@ -121,23 +112,20 @@
 
 
                                     <div class="form-group">
-                                        <h5>Sub-SubCategory Name<span class="text-danger">*</span></h5>
+                                        <h5>State Name<span class="text-danger">*</span></h5>
                                         <div class="controls">
-                                            <input type="text" name="subsubcategory_name" class="form-control">
-                                            @error('subsubcategory_name_en')
+                                            <input type="text" name="state_name" class="form-control">
+                                            @error('state_name')
                                                 <span class="text-danger">{{ $message }}</span>
                                             @enderror
                                         </div>
                                     </div>
+
 
                                     <div class="text-xs-right">
-                                        <input type="submit" class="btn btn-rounded btn-primary mb-5" value="Add New">
+                                        <input type="submit" class="btn btn-rounded btn-primary mb-5" value="Add New State">
                                     </div>
                                 </form>
-
-
-
-
 
                             </div>
                         </div>
@@ -145,9 +133,6 @@
                     </div>
                     <!-- /.box -->
                 </div>
-
-
-
 
             </div>
             <!-- /.row -->
@@ -158,28 +143,26 @@
 
 
     <script>
-        $(document).ready(function() {
-            $('select[name="category_id"]').on('change', function() {
-                var category_id = $(this).val();
-                if (category_id) {
-                    $.ajax({
-                        url: "{{ url('/category/subcategory/ajax') }}/" + category_id,
-                        type: "GET",
-                        dataType: "json",
-                        success: function(data) {
-                            var d = $('select[name="subcategory_id"]').empty();
-                            $.each(data, function(key, value) {
-                                $('select[name="subcategory_id"]').append(
-                                    '<option value="' + value.id + '">' + value
-                                    .subcategory_name + '</option>');
-                            });
-                        },
-                    });
-                } else {
-                    alert('danger');
-                }
-            });
+      $(document).ready(function() {
+        $('select[name="division_id"]').on('change', function(){
+            var division_id = $(this).val();
+            if(division_id) {
+                $.ajax({
+                    url: "{{  url('/shipping/district/ajax') }}/"+division_id,
+                    type:"GET",
+                    dataType:"json",
+                    success:function(data) {
+                       var d =$('select[name="district_id"]').empty();
+                          $.each(data, function(key, value){
+                              $('select[name="district_id"]').append('<option value="'+ value.id +'">' + value.district + '</option>');
+                          });
+                    },
+                });
+            } else {
+                alert('danger');
+            }
         });
+    });
     </script>
 
 

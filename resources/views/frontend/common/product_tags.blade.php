@@ -6,7 +6,7 @@ $tags=App\Models\Product::select('product_tags')->get();
     <h3 class="section-title">Product tags</h3>
     <div class="sidebar-widget-body outer-top-xs">
         <div class="tag-list">
-            @foreach ($tags as $tag)
+            @foreach ($tags as  $tag)
              <a class="item active" title="{{ $tag->product_tags }}" href="{{ url('product/tag/'.$tag->product_tags) }}">{{ $tag->product_tags }}</a>
             @endforeach
         </div>
@@ -15,3 +15,4 @@ $tags=App\Models\Product::select('product_tags')->get();
     <!-- /.sidebar-widget-body --> 
 </div>
   <!-- /.sidebar-widget --> 
+

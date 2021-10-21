@@ -15,6 +15,7 @@ use App\Http\Controllers\Frontend\IndexController;
 use App\Http\Controllers\Frontend\PageCartController;
 use App\Http\Controllers\Backend\CouponController;
 use App\Http\Controllers\Backend\ShippingController;
+use App\Http\Controllers\Frontend\CheckoutController;
 use App\Models\User;
 
 
@@ -160,9 +161,17 @@ Route::prefix('product')->group(function () {
      
     Route::get('/district/view', [ShippingController::class, 'DistrictView'])->name('manage.district');
     Route::post('/district/store', [ShippingController::class, 'DistrictStore'])->name('district.store');
+    Route::get('/district/edit/{id}', [ShippingController::class, 'DistrictEdit'])->name('district.edit');
+    Route::post('/district/update', [ShippingController::class, 'DistrictUpdate'])->name('district.update');
+    Route::get('/district/delete/{id}', [ShippingController::class, 'DistrictDelete'])->name('district.delete');  
+
+    Route::get('/district/ajax/{division_id}', [ShippingController::class, 'GetDistrict']);
 
     Route::get('/state/view', [ShippingController::class, 'StateView'])->name('manage.state'); 
-    
+    Route::post('/state/store', [ShippingController::class, 'StateStore'])->name('state.store');
+    Route::get('/state/edit/{id}', [ShippingController::class, 'StateEdit'])->name('state.edit');
+    Route::post('/state/update', [ShippingController::class, 'StateUpdate'])->name('state.update');
+    Route::get('/state/delete/{id}', [ShippingController::class, 'StateDelete'])->name('state.delete');
   
     });// Admin shipping All Route Group End 
 
@@ -264,4 +273,8 @@ Route::post('/coupon_apply',[CartController::class,'CouponApply']);
 Route::get('/coupon-calculation',[CartController::class,'CouponCalculation']);
 Route::get('/coupon-remove',[CartController::class,'CouponRemove']);
 
-
+// code for checkout
+Route::get('/cart/checkout',[CheckoutController::class,'CheckoutView'])->name('checkout');
+Route::get('/checkout/district/ajax/{division_id}',[CheckoutController::class,'GetDistrictData']);
+Route::get('/checkout/state/ajax/{district_id}',[CheckoutController::class,'GetStateData']);
+Route::post('/checkout/store',[CheckoutController::class,'CheckoutStore'])->name('store.checkout');

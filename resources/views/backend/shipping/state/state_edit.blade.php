@@ -13,39 +13,37 @@
             <div class="row">
 
 
-                <!--   ------------ Add Sub Sub Category Page -------- -->
+                <!--   ------------ Add State Page -------- -->
 
 
                 <div class="col-12">
 
                     <div class="box">
                         <div class="box-header with-border">
-                            <h3 class="box-title">Edit Sub-SubCategory </h3>
+                            <h3 class="box-title">Edit State</h3>
                         </div>
                         <!-- /.box-header -->
                         <div class="box-body">
                             <div class="table-responsive">
 
-                                <form method="post" action="{{ route('subsubcategory.update') }}">
+                                <form method="post" action="{{ route('state.update') }}">
                                     @csrf
 
-                                    <input type="hidden" name="id" value="{{ $subsubcategories->id }}">
+                                    <input type="hidden" name="id" value="{{ $state->id }}">
 
                                     <div class="form-group">
-                                        <h5>Category Select <span class="text-danger">*</span></h5>
+                                        <h5>Division Select <span class="text-danger">*</span></h5>
                                         <div class="controls">
-                                            <select name="category_id" class="form-control">
-
+                                            <select name="division_id" class="form-control">
                                                 <option value="" selected="" disabled="">Select Category</option>
-                                                @foreach ($categories as $category)
-                                                    <option value="{{ $category->id }}"
-                                                        {{ $category->id == $subsubcategories->category_id ? 'selected' : '' }}>
-                                                        {{ $category->category_name }}</option>
+                                                @foreach ($divisions as $division)
+                                                    <option value="{{ $division->id }}"
+                                                        {{ $division->id == $state->division_id ? 'selected' : '' }}>
+                                                        {{ $division->division_name }}</option>
                                                 @endforeach
                                             </select>
 
-
-                                            @error('category_id')
+                                            @error('division_id')
                                                 <span class="text-danger">{{ $message }}</span>
                                             @enderror
 
@@ -54,21 +52,19 @@
 
 
                                     <div class="form-group">
-                                        <h5>SubCategory Select <span class="text-danger">*</span></h5>
+                                        <h5>District Select<span class="text-danger">*</span></h5>
                                         <div class="controls">
 
-                                            <select name="subcategory_id" class="form-control">
-                                                <option value="" selected="" disabled="">Select SubCategory</option>
-
-                                                @foreach ($subcategories as $subsub)
-                                                    <option value="{{ $subsub->id }}"
-                                                        {{ $subsub->id == $subsubcategories->subcategory_id ? 'selected' : '' }}>
-                                                        {{ $subsub->subcategory_name }}</option>
+                                            <select name="district_id" class="form-control">
+                                                <option value="" selected="" disabled="">Select District</option>
+                                                @foreach ($districts as $district)
+                                                    <option value="{{ $district->id }}"
+                                                        {{ $district->id == $state->district_id ? 'selected' : '' }}>
+                                                        {{ $district->district }}</option>
                                                 @endforeach
-
                                             </select>
 
-                                            @error('subcategory_id')
+                                            @error('district_id')
                                                 <span class="text-danger">{{ $message }}</span>
                                             @enderror
 
@@ -77,11 +73,11 @@
 
 
                                     <div class="form-group">
-                                        <h5>Sub-SubCategory name <span class="text-danger">*</span></h5>
+                                        <h5>State name <span class="text-danger">*</span></h5>
                                         <div class="controls">
-                                            <input type="text" name="subsubcategory_name" class="form-control"
-                                                value="{{ $subsubcategories->subsubcategory_name }}">
-                                            @error('subsubcategory_name')
+                                            <input type="text" name="state_name" class="form-control"
+                                                value="{{ $state->state_name }}">
+                                            @error('state_name')
                                                 <span class="text-danger">{{ $message }}</span>
                                             @enderror
                                         </div>
@@ -91,8 +87,6 @@
                                         <input type="submit" class="btn btn-rounded btn-primary mb-5" value="Update">
                                     </div>
                                 </form>
-
-
                             </div>
                         </div>
                         <!-- /.box-body -->
@@ -109,9 +103,5 @@
         <!-- /.content -->
 
     </div>
-
-
-
-
 
 @endsection

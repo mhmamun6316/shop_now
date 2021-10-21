@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
+use Request;
 use Auth;
 use App\Models\User;
 use App\Models\Product;
@@ -14,6 +14,7 @@ use App\Models\Slider;
 use App\Models\Brand;
 use App\Models\Multi_Img;
 use Illuminate\Support\Facades\Hash;
+
 
 class IndexController extends Controller
 {
@@ -171,7 +172,23 @@ class IndexController extends Controller
             // $start = 27000; // min price value
             // $end =  40000; // max price value where('discount_price', '>=', $start)->where('discount_price', '<=', $end)->
 
-            $products = Product::where('status',1)->where('subcategory_id',$subcat_id)->orderBy('id','DESC')->paginate(4);
+            if(Request::get('sort') == 'price_asc'){
+                $products = Product::where('status',1)->orderBy('discount_price', 'ASC')->where('subcategory_id',$subcat_id)->paginate(4);
+            }elseif(Request::get('sort') == 'price_desc'){
+                $products = Product::where('status',1)->orderBy('discount_price', 'DESC')->where('subcategory_id',$subcat_id)->paginate(4);
+            }elseif(Request::get('sort') == 'name_asc'){
+                $products = Product::where('status',1)->orderBy('product_name', 'ASC')->where('subcategory_id',$subcat_id)->paginate(4);
+            }elseif(Request::get('sort') == '1'){
+                $products = Product::where('status',1)->orderBy('product_name', 'ASC')->where('subcategory_id',$subcat_id)->limit(1)->get();
+            }elseif(Request::get('sort') == '2'){
+                $products = Product::where('status',1)->orderBy('product_name', 'ASC')->where('subcategory_id',$subcat_id)->limit(2)->get();
+            }elseif(Request::get('sort') == '3'){
+                $products = Product::where('status',1)->orderBy('product_name', 'ASC')->where('subcategory_id',$subcat_id)->limit(3)->get();
+            }
+            else{
+                $products = Product::where('status',1)->where('subcategory_id',$subcat_id)->latest()->paginate(4);
+            }
+            
 
             $categories = Category::orderBy('category_name','ASC')->get();
             return view('frontend.product.subcategory_view',compact('products','categories'));

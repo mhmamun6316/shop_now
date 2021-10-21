@@ -12,7 +12,7 @@
     <meta name="author" content="">
     <meta name="keywords" content="MediaCenter, Template, eCommerce">
     <meta name="robots" content="all">
-    <title>Shop Now</title>
+    <title>@yield('title')</title>
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="{{ asset('frontend/assets/css/bootstrap.min.css ') }}">
@@ -336,22 +336,22 @@
 
 
                         miniCart += `<div class="cart-item product-summary">
-                 <div class="row">
-                     <div class="col-xs-4">
-                        <div class="image"> <a href="detail.html"><img src="/${value.options.image}" alt=""></a> </div>
-                     </div>
-                     <div class="col-xs-7">
-                        <h3 class="name"><a href="index.php?page-detail">${value.name}</a></h3>
-                        <div class="price"> ${value.price} $ *  Qty: ${value.qty}</div>
-                     </div>
+                    <div class="row">
+                        <div class="col-xs-4">
+                            <div class="image"> <a href="detail.html"><img src="/${value.options.image}" alt=""></a> </div>
+                        </div>
+                        <div class="col-xs-7">
+                            <h3 class="name"><a href="index.php?page-detail">${value.name}</a></h3>
+                            <div class="price"> ${value.price} $ *  Qty: ${value.qty}</div>
+                        </div>
 
-                     <div class="col-xs-1 action"> 
+                        <div class="col-xs-1 action"> 
 
-                     <button type="submit" id="${value.rowId}" onclick="miniCartRemove(this.id)"><i class="fa fa-trash"></i></button> 
-                     
-                     </div>
+                        <button type="submit" id="${value.rowId}" onclick="miniCartRemove(this.id)"><i class="fa fa-trash"></i></button> 
+                        
+                        </div>
 
-                  </div>
+                    </div>
 
                  </div>
                </div>

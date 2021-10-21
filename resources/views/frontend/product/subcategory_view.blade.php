@@ -118,12 +118,12 @@
                                 </div>
                                 <div class="sidebar-widget-body">
                                     <ul class="list">
-                                        <li><a href="#">Forever 18</a></li>
-                                        <li><a href="#">Nike</a></li>
-                                        <li><a href="#">Dolce & Gabbana</a></li>
-                                        <li><a href="#">Alluare</a></li>
-                                        <li><a href="#">Chanel</a></li>
-                                        <li><a href="#">Other Brand</a></li>
+                                        @php
+                                        $brands=App\Models\Brand::select('brand_name')->get();
+                                        @endphp
+                                        @foreach ($brands as $brand)
+                                              <li><a href="#">{{ $brand->brand_name }}</a></li>
+                                        @endforeach
                                     </ul>
                                     <!--<a href="#" class="lnk btn btn-primary">Show Now</a>-->
                                 </div>
@@ -138,12 +138,12 @@
                                 </div>
                                 <div class="sidebar-widget-body">
                                     <ul class="list">
-                                        <li><a href="#">Red</a></li>
-                                        <li><a href="#">Blue</a></li>
-                                        <li><a href="#">Yellow</a></li>
-                                        <li><a href="#">Pink</a></li>
-                                        <li><a href="#">Brown</a></li>
-                                        <li><a href="#">Teal</a></li>
+                                        @php
+                                        $colors=App\Models\Product::select('product_color')->get();
+                                        @endphp
+                                        @foreach ($colors as $color)
+                                            <li><a href="#">{{ $color->product_color }}</a></li>
+                                        @endforeach
                                     </ul>
                                 </div>
                                 <!-- /.sidebar-widget-body -->
@@ -236,10 +236,10 @@
                                                 <button data-toggle="dropdown" type="button" class="btn dropdown-toggle">
                                                     Position <span class="caret"></span> </button>
                                                 <ul role="menu" class="dropdown-menu">
-                                                    <li role="presentation"><a href="#">position</a></li>
-                                                    <li role="presentation"><a href="#">Price:Lowest first</a></li>
-                                                    <li role="presentation"><a href="#">Price:HIghest first</a></li>
-                                                    <li role="presentation"><a href="#">Product Name:A to Z</a></li>
+                                                    <li role="presentation"><a href="{{ URL::current() }}">ALL</a></li>
+                                                    <li role="presentation"><a href="{{ URL::current()."?sort=price_asc" }}">Price:Lowest first</a></li>
+                                                    <li role="presentation"><a href="{{ URL::current()."?sort=price_desc" }}">Price:HIghest first</a></li>
+                                                    <li role="presentation"><a href="{{ URL::current()."?sort=name_asc" }}">Product Name:A to Z</a></li>
                                                 </ul>
                                             </div>
                                         </div>
@@ -255,9 +255,9 @@
                                                 <button data-toggle="dropdown" type="button" class="btn dropdown-toggle"> 1
                                                     <span class="caret"></span> </button>
                                                 <ul role="menu" class="dropdown-menu">
-                                                    <li role="presentation"><a href="#">1</a></li>
-                                                    <li role="presentation"><a href="#">2</a></li>
-                                                    <li role="presentation"><a href="#">3</a></li>
+                                                    <li role="presentation"><a href="{{ URL::current()."?sort=1" }}">1</a></li>
+                                                    <li role="presentation"><a href="{{ URL::current()."?sort=2" }}">2</a></li>
+                                                    <li role="presentation"><a href="{{ URL::current()."?sort=2" }}">3</a></li>
                                                     <li role="presentation"><a href="#">4</a></li>
                                                     <li role="presentation"><a href="#">5</a></li>
                                                     <li role="presentation"><a href="#">6</a></li>
@@ -488,9 +488,10 @@
                             <div class="text-right">
                                 <div class="pagination-container">
 
-                                    <ul class="list-inline list-unstyled">
+                                    {{-- <ul class="list-inline list-unstyled">
                                         {{ $products->links() }}
-                                    </ul>
+                                    </ul> --}}
+                                    {{-- i commented this --}}
 
                                     <!-- /.list-inline -->
                                 </div>

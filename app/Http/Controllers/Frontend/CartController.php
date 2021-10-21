@@ -109,8 +109,7 @@ class CartController extends Controller
 
             $coupon = Coupon::where('coupon_name',$request->coupon_name)->where('coupon_validity','>=',Carbon::now()->format('Y-m-d'))->first();
 
-            $total=str_replace(',', '', Cart::total());     
-            
+            $total=str_replace(',','', Cart::total());     
             
             if ($coupon) {
                 Session::put('coupon',[

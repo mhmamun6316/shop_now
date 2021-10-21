@@ -16,9 +16,9 @@
 
                     <!-- ======================= HOT DEALS ===================== -->
                     @include('frontend.common.hot_deals')
-                    <!-- ========================== HOT DEALS: END ============================== -->
+                    <!-- ========================== HOT DEALS: END ========================== -->
 
-                    <!-- ============================ SPECIAL OFFER ======================== -->
+                    <!-- ===================== SPECIAL OFFER ====================== -->
 
                     <div class="sidebar-widget outer-bottom-small wow fadeInUp">
                         <h3 class="section-title">Special Offer</h3>
@@ -73,9 +73,9 @@
 
                     <!-- ================== PRODUCT TAGS ============== -->
                     @include('frontend.common.product_tags')
-                    <!-- ======================== PRODUCT TAGS : END ============================= -->
+                    <!-- ===================== PRODUCT TAGS : END ======================= -->
 
-                    <!-- ======================== SPECIAL DEALS ================================ -->
+                    <!-- ====================== SPECIAL DEALS ========================= -->
 
                     <div class="sidebar-widget outer-bottom-small wow fadeInUp">
                         <h3 class="section-title">Special Deals</h3>
@@ -125,8 +125,8 @@
                         <!-- /.sidebar-widget-body -->
                     </div>
                     <!-- /.sidebar-widget -->
-                    <!-- ============================================== SPECIAL DEALS : END ============================================== -->
-                    <!-- ============================================== NEWSLETTER ============================================== -->
+                    <!-- ============== SPECIAL DEALS : END =================== -->
+                    <!-- ================== NEWSLETTER ==================== -->
                     <div class="sidebar-widget newsletter wow fadeInUp outer-bottom-small">
                         <h3 class="section-title">Newsletters</h3>
                         <div class="sidebar-widget-body outer-top-xs">
@@ -168,7 +168,8 @@
                                             <div class="slider-header fadeInDown-1">Top Brands</div>
                                             <div class="big-text fadeInDown-1">{{ $item->title }} </div>
                                             <div class="excerpt fadeInDown-2 hidden-xs">
-                                                <span>{{ $item->description }}</span> </div>
+                                                <span>{{ $item->description }}</span>
+                                            </div>
                                             <div class="button-holder fadeInDown-3"> <a href="index.php?page=single-product"
                                                     class="btn-lg btn btn-uppercase btn-primary shop-now-button">Shop
                                                     Now</a> </div>
@@ -231,7 +232,7 @@
 
                     </div>
                     <!-- /.info-boxes -->
-                    <!-- =========================== INFO BOXES : END ======================== -->
+                    <!-- ========================== INFO BOXES : END ======================= -->
                     <!-- ========================== SCROLL TABS ========================== -->
                     <div id="product-tabs-slider" class="scroll-tabs outer-top-vs wow fadeInUp">
                         <div class="more-info-tab clearfix ">
@@ -265,7 +266,8 @@
                                                 <div class="products">
                                                     <div class="product">
                                                         <div class="product-image">
-                                                            <div class="image"> <a href="{{ url('product/detail/' . $product->id) }}"><img
+                                                            <div class="image"> <a
+                                                                    href="{{ url('product/detail/' . $product->id) }}"><img
                                                                         src="{{ asset($product->product_thambnail) }}"
                                                                         alt=""></a> </div>
                                                             <!-- /.image -->
@@ -282,7 +284,8 @@
                                                                     </div>
                                                                 @else
                                                                     <div class="tag hot">
-                                                                        <span>{{ round($discount) }} %</span></div>
+                                                                        <span>{{ round($discount) }} %</span>
+                                                                    </div>
                                                                 @endif
                                                             </div>
 
@@ -319,10 +322,9 @@
                                                                         <button class="btn btn-primary cart-btn"
                                                                             type="button">Add to cart</button>
                                                                     </li>
-                                                                    <li class="lnk wishlist"> <a data-toggle="tooltip"
-                                                                            class="add-to-cart" href="detail.html"
-                                                                            title="Wishlist"> <i
-                                                                                class="icon fa fa-heart"></i> </a> </li>
+                                                                    <button class="btn btn-primary icon" type="button" title="Wishlist"
+                                                                    id="{{ $product->id }}" onclick="addToWishList(this.id)">
+                                                                    <i class="fa fa-heart"></i> </button>
                                                                     <li class="lnk"> <a data-toggle="tooltip"
                                                                             class="add-to-cart" href="detail.html"
                                                                             title="Compare"> <i class="fa fa-signal"
@@ -391,7 +393,8 @@
                                                                                 Discount</span></div>
                                                                     @else
                                                                         <div class="tag hot">
-                                                                            <span>{{ round($discount) }} %</span></div>
+                                                                            <span>{{ round($discount) }} %</span>
+                                                                        </div>
                                                                     @endif
                                                                 </div>
 
@@ -422,20 +425,22 @@
                                                                 <div class="action">
                                                                     <ul class="list-unstyled">
                                                                         <li class="add-cart-button btn-group">
-                                                                            <button data-toggle="tooltip"
-                                                                                class="btn btn-primary icon" type="button"
-                                                                                title="Add Cart"> <i
-                                                                                    class="fa fa-shopping-cart"></i>
+                                                                            <button class="btn btn-primary icon"
+                                                                                type="button" title="Add Cart"
+                                                                                data-toggle="modal"
+                                                                                data-target="#exampleModal"
+                                                                                id="{{ $product->id }}"
+                                                                                onclick="productView(this.id)">
+                                                                                <i class="fa fa-shopping-cart"></i>
                                                                             </button>
+
                                                                             <button class="btn btn-primary cart-btn"
                                                                                 type="button">Add to cart</button>
                                                                         </li>
-                                                                        <li class="lnk wishlist"> <a
-                                                                                data-toggle="tooltip"
-                                                                                class="add-to-cart" href="detail.html"
-                                                                                title="Wishlist"> <i
-                                                                                    class="icon fa fa-heart"></i> </a>
-                                                                        </li>
+                                                                        <button class="btn btn-primary icon" type="button"
+                                                                            title="Wishlist" id="{{ $product->id }}"
+                                                                            onclick="addToWishList(this.id)">
+                                                                            <i class="fa fa-heart"></i> </button>
                                                                         <li class="lnk"> <a
                                                                                 data-toggle="tooltip"
                                                                                 class="add-to-cart" href="detail.html"
@@ -551,16 +556,17 @@
                                                 <div class="action">
                                                     <ul class="list-unstyled">
                                                         <li class="add-cart-button btn-group">
-                                                            <button class="btn btn-primary icon" data-toggle="dropdown"
-                                                                type="button"> <i class="fa fa-shopping-cart"></i>
-                                                            </button>
+                                                            <button class="btn btn-primary icon" type="button"
+                                                                title="Add Cart" data-toggle="modal"
+                                                                data-target="#exampleModal" id="{{ $feature->id }}"
+                                                                onclick="productView(this.id)">
+                                                                <i class="fa fa-shopping-cart"></i> </button>
                                                             <button class="btn btn-primary cart-btn" type="button">Add to
                                                                 cart</button>
                                                         </li>
-                                                        <button class="btn btn-primary icon" type="button" title="Wishlist" 
-                                                        id="{{ $feature->id }}"
-                                                        onclick="addToWishList(this.id)">
-                                                          <i class="fa fa-heart"></i> </button>
+                                                        <button class="btn btn-primary icon" type="button" title="Wishlist"
+                                                            id="{{ $feature->id }}" onclick="addToWishList(this.id)">
+                                                            <i class="fa fa-heart"></i> </button>
                                                         <li class="lnk"> <a class="add-to-cart"
                                                                 href="detail.html" title="Compare"> <i
                                                                     class="fa fa-signal" aria-hidden="true"></i> </a>
@@ -1215,7 +1221,8 @@
                                             <div class="rating rateit-small"></div>
                                             <div class="description"></div>
                                             <div class="product-price"> <span class="price"> $450.99 </span>
-                                                <span class="price-before-discount">$ 800</span> </div>
+                                                <span class="price-before-discount">$ 800</span>
+                                            </div>
                                             <!-- /.product-price -->
 
                                         </div>
@@ -1266,7 +1273,8 @@
                                             <div class="rating rateit-small"></div>
                                             <div class="description"></div>
                                             <div class="product-price"> <span class="price"> $450.99 </span>
-                                                <span class="price-before-discount">$ 800</span> </div>
+                                                <span class="price-before-discount">$ 800</span>
+                                            </div>
                                             <!-- /.product-price -->
 
                                         </div>
@@ -1317,7 +1325,8 @@
                                             <div class="rating rateit-small"></div>
                                             <div class="description"></div>
                                             <div class="product-price"> <span class="price"> $450.99 </span>
-                                                <span class="price-before-discount">$ 800</span> </div>
+                                                <span class="price-before-discount">$ 800</span>
+                                            </div>
                                             <!-- /.product-price -->
 
                                         </div>
@@ -1368,7 +1377,8 @@
                                             <div class="rating rateit-small"></div>
                                             <div class="description"></div>
                                             <div class="product-price"> <span class="price"> $450.99 </span>
-                                                <span class="price-before-discount">$ 800</span> </div>
+                                                <span class="price-before-discount">$ 800</span>
+                                            </div>
                                             <!-- /.product-price -->
 
                                         </div>
@@ -1419,7 +1429,8 @@
                                             <div class="rating rateit-small"></div>
                                             <div class="description"></div>
                                             <div class="product-price"> <span class="price"> $450.99 </span>
-                                                <span class="price-before-discount">$ 800</span> </div>
+                                                <span class="price-before-discount">$ 800</span>
+                                            </div>
                                             <!-- /.product-price -->
 
                                         </div>
@@ -1470,7 +1481,8 @@
                                             <div class="rating rateit-small"></div>
                                             <div class="description"></div>
                                             <div class="product-price"> <span class="price"> $450.99 </span>
-                                                <span class="price-before-discount">$ 800</span> </div>
+                                                <span class="price-before-discount">$ 800</span>
+                                            </div>
                                             <!-- /.product-price -->
 
                                         </div>

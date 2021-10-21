@@ -118,12 +118,12 @@
                                 </div>
                                 <div class="sidebar-widget-body">
                                     <ul class="list">
-                                        <li><a href="#">Forever 18</a></li>
-                                        <li><a href="#">Nike</a></li>
-                                        <li><a href="#">Dolce & Gabbana</a></li>
-                                        <li><a href="#">Alluare</a></li>
-                                        <li><a href="#">Chanel</a></li>
-                                        <li><a href="#">Other Brand</a></li>
+                                        @php
+                                        $brands=App\Models\Brand::select('brand_name')->get();
+                                        @endphp
+                                        @foreach ($brands as $brand)
+                                              <li><a href="#">{{ $brand->brand_name }}</a></li>
+                                        @endforeach
                                     </ul>
                                     <!--<a href="#" class="lnk btn btn-primary">Show Now</a>-->
                                 </div>
@@ -138,12 +138,12 @@
                                 </div>
                                 <div class="sidebar-widget-body">
                                     <ul class="list">
-                                        <li><a href="#">Red</a></li>
-                                        <li><a href="#">Blue</a></li>
-                                        <li><a href="#">Yellow</a></li>
-                                        <li><a href="#">Pink</a></li>
-                                        <li><a href="#">Brown</a></li>
-                                        <li><a href="#">Teal</a></li>
+                                        @php
+                                        $colors=App\Models\Product::select('product_color')->get();
+                                        @endphp
+                                        @foreach ($colors as $color)
+                                            <li><a href="#">{{ $color->product_color }}</a></li>
+                                        @endforeach
                                     </ul>
                                 </div>
                                 <!-- /.sidebar-widget-body -->
