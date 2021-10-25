@@ -16,6 +16,7 @@ use App\Http\Controllers\Frontend\PageCartController;
 use App\Http\Controllers\Backend\CouponController;
 use App\Http\Controllers\Backend\ShippingController;
 use App\Http\Controllers\Frontend\CheckoutController;
+use App\Http\Controllers\Frontend\StripeController;
 use App\Models\User;
 
 
@@ -278,3 +279,6 @@ Route::get('/cart/checkout',[CheckoutController::class,'CheckoutView'])->name('c
 Route::get('/checkout/district/ajax/{division_id}',[CheckoutController::class,'GetDistrictData']);
 Route::get('/checkout/state/ajax/{district_id}',[CheckoutController::class,'GetStateData']);
 Route::post('/checkout/store',[CheckoutController::class,'CheckoutStore'])->name('store.checkout');
+
+// code for payment
+Route::post('/payment/store',[StripeController::class,'StripeOrder'])->name('stripe.order');

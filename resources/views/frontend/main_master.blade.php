@@ -35,6 +35,7 @@
         rel='stylesheet' type='text/css'>
     <link href='https://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://js.stripe.com/v3/"></script>
 </head>
 
 <body class="cnt-home">
@@ -46,9 +47,9 @@
 
     @yield('content')
 
-    <!-- ============================================================= FOOTER ============================================================= -->
+    <!-- ======================================= FOOTER ================================ -->
     @include('frontend.body.footer')
-    <!-- ============================================================= FOOTER : END============================================================= -->
+    <!-- =============================== FOOTER : END================================= -->
 
     <!-- For demo purposes – can be removed on production -->
 

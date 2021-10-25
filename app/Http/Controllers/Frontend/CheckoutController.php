@@ -16,7 +16,7 @@ class CheckoutController extends Controller
     public function CheckoutView(){
         if(Auth::check()){
             if(Cart::total()>0){
-                $carts= Cart::content();;
+                $carts= Cart::content();
                 $subTotal=Cart::total();
                 // dd($carts);
                 // dd(Cart::total());
@@ -53,13 +53,26 @@ class CheckoutController extends Controller
 
         $request->validate([
             'postal_code' => 'required',
+            'user_name' => 'required',
+            'state_id' => 'required'
         ]);
 
         $data=array();
         $data['user_name'] = $request->user_name;
+        $data['user_mail'] = $request->user_mail;
+        $data['user_phone'] = $request->user_phone;
+        $data['postal_code'] = $request->postal_code;
+
+        $data['division_id'] = $request->division_id;
+        $data['district_id'] = $request->district_id;
+        $data['state_id'] = $request->state_id;
+        $data['notes'] = $request->notes;
+
+
+        $cartTotal=Cart::total();
 
         if($request->payment_method == 'stripe'){
-            return view('frontend.payment.stripe',compact('data'));
+            return view('frontend.payment.stripe',compact('data','cartTotal'));
         }elseif($request->payment_method == 'card'){
             return 'card';
         }else{
